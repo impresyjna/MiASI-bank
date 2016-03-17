@@ -9,7 +9,7 @@ public class Deposit extends Account implements Interest{
 	private double interest = 0;
 	private double interestRate;
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	
+
 	private Deposit(double balance, double interestRate, Date endDate){
 		try {
 			this.endDate = dateFormat.parse(endDate.toString());

@@ -1,7 +1,7 @@
 import java.util.Date;
 
 public class Operation {
-	private Date executionTime; 
+	private Date executionTime;
 	private String description;
 	private OperationType type;
 	private Account account;
