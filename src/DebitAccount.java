@@ -37,5 +37,23 @@ public class DebitAccount extends Account implements Interest {
         }
     }
 
+    @Override
+    public Operation addMoney(double money, String description) {
+        //TODO:
+        return null;
+    }
+
+    @Override
+    public Operation minusMoney(double money) {
+        //TODO:
+        return null;
+    }
+
+    @Override
+    public Operation transferMoney(double money, Account account) {
+        //TODO:
+        return null;
+    }
+
 
 }

@@ -9,7 +9,7 @@ public abstract class Account {
 	protected boolean open;
 
 	public abstract boolean closeAccount();
-	public abstract Operation addMoney(double money);
+	public abstract Operation addMoney(double money, String description);
 	public abstract Operation minusMoney(double money);
 	public abstract Operation transferMoney(double money, Account account);
 

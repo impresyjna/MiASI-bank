@@ -45,4 +45,22 @@ public class Deposit extends Account implements Interest{
 			return false;
 		}
 	}
+
+	@Override
+	public Operation addMoney(double money, String description) {
+		//TODO:
+		return null;
+	}
+
+	@Override
+	public Operation minusMoney(double money) {
+		//TODO:
+		return null;
+	}
+
+	@Override
+	public Operation transferMoney(double money, Account account) {
+		//TODO:
+		return null;
+	}
 }
