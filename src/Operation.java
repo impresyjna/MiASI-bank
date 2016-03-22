@@ -7,13 +7,19 @@ public class Operation {
 	private Account account;
 	private double balance;
 	private Account secondAccountForTransfer;
+	private double oldBalance;
 
-	public Operation(double balance, Date executionTime, String description, OperationType type, Account account) {
+	public double getOldBalance() {
+		return oldBalance;
+	}
+
+	public Operation(double balance, Date executionTime, String description, OperationType type, Account account, double oldBalance) {
 		this.balance = balance;
 		this.executionTime = executionTime;
 		this.description = description;
 		this.type = type;
 		this.account = account;
+		this.oldBalance = oldBalance;
 	}
 
 	public void setSecondAccountForTransfer(Account secondAccountForTransfer) {

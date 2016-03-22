@@ -19,21 +19,21 @@ public class NonDebitAccount extends Account{
     }
 
     @Override
-    public Operation addMoney(double money, String description) {
-        Operation operation = new Operation(money, new Date(), description, OperationType.AddMoney, this);
+    public boolean addMoney(double money, String description) {
+        Operation operation = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
         this.balance += money;
-        return operation;
+        return  true;
     }
 
     @Override
-    public Operation minusMoney(double money) {
-        //TODO:
-        return null;
+    public boolean minusMoney(double money, String description) {
+        return false;
     }
 
     @Override
-    public Operation transferMoney(double money, Account account) {
-        //TODO:
-        return null;
+    public boolean transferMoney(double money, Account account, String description) {
+        return true;
     }
+
+
 }

@@ -27,20 +27,20 @@ public class Loan extends Account implements Interest{
 	}
 
 	@Override
-	public Operation addMoney(double money, String description) {
+	public boolean addMoney(double money, String description) {
 		//TODO:
-		return null;
+		return true;
 	}
 
 	@Override
-	public Operation minusMoney(double money) {
+	public boolean minusMoney(double money, String description) {
 		//TODO:
-		return null;
+		return true;
 	}
 
 	@Override
-	public Operation transferMoney(double money, Account account) {
+	public boolean transferMoney(double money, Account account, String description) {
 		//TODO:
-		return null;
+		return true;
 	}
 }
