@@ -5,84 +5,72 @@ import junit.framework.TestCase;
  */
 public class DebitAccountTest extends TestCase {
 
-
-    public void testCalculateInterest1() throws Exception {
+    public void testCalculateInterest_negativeBalance() throws Exception {
         DebitAccount da = new DebitAccount(-500,0.5);
         assertTrue(da.getInterest()==0);
     }
 
-    public void testCalculateInterest2() throws Exception {
+    public void testCalculateInterest_ok() throws Exception {
         DebitAccount da = new DebitAccount(-500,0.5);   //limit
         da.minusMoney(200,"");  //balance
         assertTrue(da.getInterest()==100);
     }
 
-    public void testCloseAccount1() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
-        da.minusMoney(200,"");
-        assertFalse(da.closeAccount());
-    }
-
-    public void testCloseAccount2() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
-        da.minusMoney(200,"");
-        da.addMoney(200,"");
-        assertTrue(da.closeAccount());
-    }
-
-    public void testAddMoney1() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
-        da.addMoney(500,"");
-        assertTrue(da.getBalance()==500);
-        if(da.getOperations().size()>0) {
-            assertTrue(da.getOperations().get(0).getBalance() == 500);
-            assertTrue(da.getOperations().get(0).getType() == OperationType.AddMoney);
-            assertTrue(da.getOperations().get(0).getOldBalance() == 0);
-        }else{
-            assertFalse(true);
-        }
-    }
-
-    public void testAddMoney2() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
-        assertFalse(da.addMoney(-500,""));
-    }
-
-    public void testMinusMoney1() throws Exception {
+    public void testMinusMoney_overLimit() throws Exception {
         DebitAccount da = new DebitAccount(-500,0.5);
         assertFalse(da.minusMoney(1000,""));
     }
 
-    public void testMinusMoney2() throws Exception {
+    public void testMinusMoney_negativeMoney() throws Exception {
         DebitAccount da = new DebitAccount(-500,0.5);
         assertFalse(da.minusMoney(-500,""));
     }
 
-    public void testMinusMoney3() throws Exception {
-        //TODO: Rozbić na dwa testCase
+    public void testMinusMoney_ok() throws Exception {
         DebitAccount da = new DebitAccount(-500,0.5);
         da.minusMoney(500,"");
         assertTrue(da.getBalance()==-500);
-        if(da.getOperations().size()>0) {
-            assertTrue(da.getOperations().get(0).getBalance() == 500);
-            assertTrue(da.getOperations().get(0).getType() == OperationType.MinusMoney);
-            assertTrue(da.getOperations().get(0).getOldBalance() == 0);
-        }else{
-            fail();
-        }
+        assertTrue(da.getOperations().size()>0);
+        assertTrue(da.getOperations().get(0).getBalance() == 500);
+        assertTrue(da.getOperations().get(0).getType() == OperationType.MinusMoney);
+        assertTrue(da.getOperations().get(0).getOldBalance() == 0);
     }
 
-    public void testTransferMoney1() throws Exception {
+    public void testTransferMoney_negativeMoney() throws Exception {
         DebitAccount da1 = new DebitAccount(-500,0.5);
         DebitAccount da2 = new DebitAccount(-500,0.5);
         assertFalse(da1.transferMoney(-5,da2,""));
     }
 
-    public void testTransferMoney2() throws Exception {
+    public void testTransferMoney_closeAccount() throws Exception {
         DebitAccount da1 = new DebitAccount(-500,0.5);
         DebitAccount da2 = new DebitAccount(0,0.5);
         da2.closeAccount();
-        assertFalse(da1.transferMoney(5,da2,""));   //TODO dokończyć
+        assertFalse(da1.transferMoney(5,da2,""));
+    }
+
+    public void testTransferMoney_overLimit() throws Exception {
+        DebitAccount da1 = new DebitAccount(-500,0.5); //limit=-500
+        DebitAccount da2 = new DebitAccount(0,0.5);
+        assertFalse(da1.transferMoney(600,da2,""));
+    }
+
+    public void testTransferMoney_ok() throws Exception {
+        DebitAccount da1 = new DebitAccount(-500,0.5);
+        DebitAccount da2 = new DebitAccount(-100,0.5);
+        assertTrue(da1.transferMoney(400,da2,""));
+        assertTrue(da1.getBalance()==-400);
+        assertTrue(da2.getBalance()==400);
+
+        assertTrue(da1.getOperations().size()>0);
+        assertTrue(da1.getOperations().get(0).getType() == OperationType.TransferMoneyMinus);
+        assertTrue(da1.getOperations().get(0).getBalance() == 400);
+        assertTrue(da1.getOperations().get(0).getOldBalance() == 0);
+
+        assertTrue(da2.getOperations().size()>0);
+        assertTrue(da2.getOperations().get(0).getType() == OperationType.TransferMoneyPlus);
+        assertTrue(da2.getOperations().get(0).getBalance() == 400);
+        assertTrue(da2.getOperations().get(0).getOldBalance() == 0);
     }
 
 }

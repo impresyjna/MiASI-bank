@@ -1,3 +1,3 @@
 public enum OperationType {
-    AddMoney, MinusMoney, TransferMoney;
+    AddMoney, MinusMoney, TransferMoneyMinus, TransferMoneyPlus
 }

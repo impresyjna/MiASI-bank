@@ -28,29 +28,6 @@ public class DebitAccount extends Account implements Interest {
     }
 
     @Override
-    public boolean closeAccount() {
-        if (this.balance == 0 && this.open) {
-            this.open = false;
-            return true;
-        } else {
-            return false;
-        }
-        // TODO wypłata środków klienta
-    }
-
-    @Override
-    public boolean addMoney(double money, String description) {
-        if (money > 0) {
-            Operation op = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
-            balance += money;
-            operations.add(op);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public boolean minusMoney(double money, String description) {
         if (balance - money >= limit && money > 0) {
             Operation op = new Operation(money, new Date(), description, OperationType.MinusMoney, this, balance);
@@ -65,15 +42,11 @@ public class DebitAccount extends Account implements Interest {
     @Override
     public boolean transferMoney(double money, Account account, String description) {
         if (money > 0 && account.isOpen() && balance - money >= limit) {
-            Operation op = new Operation(money, new Date(), description, OperationType.TransferMoney, this, balance);
-            op.setSecondAccountForTransfer(account);
-            this.minusMoney(money,description);
-            account.addMoney(money,description);
+            executeTransferMoney(money,account,description);
             return true;
         } else {
             return false;
         }
     }
-
 
 }

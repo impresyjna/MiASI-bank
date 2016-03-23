@@ -9,31 +9,25 @@ public class NonDebitAccount extends Account{
     }
 
     @Override
-    public boolean closeAccount() {
-        if(this.balance==0 && this.open){
-            this.open = false;
+    public boolean minusMoney(double money, String description) {
+        if (balance - money >= 0 && money > 0) {
+            Operation op = new Operation(money, new Date(), description, OperationType.MinusMoney, this, balance);
+            balance -= money;
+            operations.add(op);
             return true;
-        } else {
+        } else{
             return false;
         }
     }
 
     @Override
-    public boolean addMoney(double money, String description) {
-        Operation operation = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
-        this.balance += money;
-        return  true;
-    }
-
-    @Override
-    public boolean minusMoney(double money, String description) {
-        return false;
-    }
-
-    @Override
     public boolean transferMoney(double money, Account account, String description) {
-        return true;
+        if (money > 0 && account.isOpen() && balance - money >= 0) {
+            executeTransferMoney(money,account,description);
+            return true;
+        } else {
+            return false;
+        }
     }
-
 
 }

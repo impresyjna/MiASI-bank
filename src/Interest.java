@@ -1,4 +1,4 @@
 
 public interface Interest {	
-	public void calculateInterest();
+	void calculateInterest();
 }
