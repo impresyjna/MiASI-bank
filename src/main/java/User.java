@@ -5,11 +5,29 @@ public class User {
 	private String name; 
 	private String surname; 
 	private List<Account> accounts;
-	
-	public User(int id, String name, String surname) {
-		this.id = id;
+	private Bank bank = Bank.getInstance();
+
+	public User(String name, String surname) {
 		this.name = name;
 		this.surname = surname;
+		bank.addUserToList(this);
+		this.id = bank.getUsers().lastIndexOf(this);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public List<Account> getAccounts() {
+		return accounts;
 	}
 
 	public void addAccount(Account account){

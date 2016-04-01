@@ -5,8 +5,11 @@ public class Loan extends Account implements Interest{
 	private double interestPercent; 
 	private double balance; 
 	
-	private Loan(){
-		//TODO: 
+	private Loan(long accountId, double interest, double interestPercent, double balance){
+		this.accountId = accountId;
+		this.interest = interest;
+		this.interestPercent = interestPercent;
+		this.balance = balance;
 	}
 	
 	@Override

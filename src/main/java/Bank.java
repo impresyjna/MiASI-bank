@@ -4,7 +4,15 @@ import java.util.List;
 public class Bank {
     private List<User> users = new ArrayList<>();
     private List<Account> accounts = new ArrayList<>();
+    private static Bank instance = null;
     //TODO singleton, dodawanie w konstruktorach
+
+    public static Bank getInstance(){
+        if(instance == null) {
+            instance = new Bank();
+        }
+        return instance;
+    }
 
     public List<User> getUsers() {
         return users;

@@ -1,11 +1,13 @@
 import java.util.Date;
 
 public class NonDebitAccount extends Account{
+    private Bank bank = Bank.getInstance();
 
     public NonDebitAccount(){
         this.startDate = new Date();
         this.open = true;
         this.balance = 0;
+        bank.addAccountToList(this);
     }
 
     @Override
