@@ -8,6 +8,7 @@ public class NonDebitAccount extends Account{
         this.open = true;
         this.balance = 0;
         bank.addAccountToList(this);
+        this.id = bank.getAccounts().lastIndexOf(this);
     }
 
     @Override
