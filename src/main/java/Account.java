@@ -3,70 +3,75 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class Account {
-	protected long ownerId;
-	protected Date startDate;
-	protected double balance;
-	protected List<Operation> operations = new ArrayList<>();
-	protected boolean open;
+    protected long ownerId;
+    protected long id;
+    protected Date startDate;
+    protected double balance;
+    protected List<Operation> operations = new ArrayList<>();
+    protected boolean open;
 
-	public abstract boolean minusMoney(double money, String description);
-	public abstract boolean transferMoney(double money, Account account, String description);
+    public abstract boolean minusMoney(double money, String description);
 
-	public boolean closeAccount(){
-		if(this.balance==0 && this.open){
-			this.open = false;
-			return true;
-		} else {
-			return false;
-		}
-		// TODO wypłata środków klienta
-	}
+    public abstract boolean transferMoney(double money, Account account, String description);
 
-	public boolean addMoney(double money, String description){
-		if (money > 0) {
-			Operation op = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
-			balance += money;
-			operations.add(op);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public boolean closeAccount() {
+        if (this.balance == 0 && this.open) {
+            this.open = false;
+            return true;
+        } else if (this.balance > 0 && this.open) {
+            this.minusMoney(this.balance, "Close account. Client gets the money");
+            this.open = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public void executeTransferMoney(double money, Account account, String description){
-		Operation op = new Operation(money, new Date(), description, OperationType.TransferMoneyMinus, this, balance);
-		op.setSecondAccountForTransfer(account);
-		operations.add(op);
+    public boolean addMoney(double money, String description) {
+        if (money > 0) {
+            Operation op = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
+            balance += money;
+            operations.add(op);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-		Operation op2 = new Operation(money, new Date(), description, OperationType.TransferMoneyPlus, account, account.getBalance());
-		op.setSecondAccountForTransfer(this);
-		account.getOperations().add(op2);
+    public void executeTransferMoney(double money, Account account, String description) {
+        Operation op = new Operation(money, new Date(), description, OperationType.TransferMoneyMinus, this, balance);
+        op.setSecondAccountForTransfer(account);
+        operations.add(op);
 
-		this.minusMoney(money,description);
-		account.addMoney(money,description);
-	}
+        Operation op2 = new Operation(money, new Date(), description, OperationType.TransferMoneyPlus, account, account.getBalance());
+        op.setSecondAccountForTransfer(this);
+        account.getOperations().add(op2);
 
-	public void setOwnerId(long ownerId) {
-		this.ownerId = ownerId;
-	}
+        this.minusMoney(money, description);
+        account.addMoney(money, description);
+    }
 
-	public long getOwnerId() {
-		return ownerId;
-	}
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public long getOwnerId() {
+        return ownerId;
+    }
 
-	public double getBalance() {
-		return balance;
-	}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public List<Operation> getOperations() {
-		return operations;
-	}
+    public double getBalance() {
+        return balance;
+    }
 
-	public boolean isOpen() {
-		return open;
-	}
+    public List<Operation> getOperations() {
+        return operations;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
 }

@@ -18,6 +18,14 @@ public class AccountTest extends TestCase {
         assertTrue(da.closeAccount());
     }
 
+    public void testCloseAccountWithPlusBalance_ok() throws Exception {
+        DebitAccount da = new DebitAccount(-500, 0.5);
+        da.addMoney(500, "Add money");
+        assertTrue(da.closeAccount());
+        assertTrue(da.getOperations().size()==2);
+        assertTrue(da.balance==0);
+    }
+
     public void testAddMoney_ok() throws Exception {
         DebitAccount da = new DebitAccount(-500,0.5);
         da.addMoney(500,"");
