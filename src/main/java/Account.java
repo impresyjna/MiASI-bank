@@ -31,6 +31,7 @@ public abstract class Account {
         if (money > 0) {
             Operation op = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
             balance += money;
+            System.out.println(balance);
             operations.add(op);
             return true;
         } else {
@@ -53,14 +54,6 @@ public abstract class Account {
 
     public void setOwnerId(long ownerId) {
         this.ownerId = ownerId;
-    }
-
-    public long getOwnerId() {
-        return ownerId;
-    }
-
-    public Date getStartDate() {
-        return startDate;
     }
 
     public double getBalance() {
