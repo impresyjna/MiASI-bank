@@ -9,6 +9,7 @@ public abstract class Account {
     protected double balance;
     protected List<Operation> operations = new ArrayList<>();
     protected boolean open;
+    protected List<Deposit> deposits = new ArrayList<>();
 
     public abstract boolean minusMoney(double money, String description);
 
@@ -63,7 +64,15 @@ public abstract class Account {
     public List<Operation> getOperations() {
         return operations;
     }
+    
+    public List<Deposit> getDeposits() {
+        return deposits;
+    }
 
+    public void addDeposit(Deposit deposit) {
+    	this.deposits.add(deposit);
+    }
+    
     public boolean isOpen() {
         return open;
     }

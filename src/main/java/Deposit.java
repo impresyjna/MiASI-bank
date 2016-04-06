@@ -1,26 +1,29 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Deposit extends Account implements Interest{
-	private long accountId;
+public class Deposit implements Interest  {
+	private Account account;
 	private Date endDate;
 	private int duration;
 	private double interest = 0;
 	private double interestRate;
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private boolean open;
+    private double balance;
 
-	private Deposit(double balance, double interestRate, Date endDate){
-		try {
-			this.endDate = dateFormat.parse(endDate.toString());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		long diffInMillies = endDate.getTime() - startDate.getTime();
-	    this.duration = (int) diffInMillies/(24*60*60*1000);
+    public static Deposit createDeposit(double balance, double interestRate, Date endDate, Account account) throws NotEnoughMoneyException {
+    	if(account.minusMoney(balance, "create deposit")) {
+    		return new Deposit(balance, interestRate, endDate, account);
+    	}else {
+    		throw new NotEnoughMoneyException();
+    	}
+    }
+    
+	private Deposit(double balance, double interestRate, Date endDate, Account account){
+		account.addDeposit(this);
+		this.endDate=endDate;
 		this.open = true;
 		this.balance = balance;
 		this.interestRate = interestRate;
+		this.account = account;
 	}
 
 	@Override
@@ -28,17 +31,12 @@ public class Deposit extends Account implements Interest{
 		interest = balance * interestRate;
 	}
 
-	@Override
 	public boolean closeAccount() {
 		if(this.open){
-			//TODO:
-			try {
-				if(endDate.equals(dateFormat.parse((new Date()).toString()))){
-					calculateInterest();
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if(new Date().after(endDate)) {
+				calculateInterest();
 			}
+			account.addMoney(balance+interest, "close deposit");
 			this.open = false;
 			return true;
 		} else {
@@ -46,20 +44,30 @@ public class Deposit extends Account implements Interest{
 		}
 	}
 
-	@Override
-	public boolean addMoney(double money, String description) {
-		return true;
+	public Date getEndDate()
+	{
+		return endDate;
 	}
 
-	@Override
-	public boolean minusMoney(double money, String description) {
-		return false;
+	public int getDuration()
+	{
+		return duration;
 	}
 
-	@Override
-	public boolean transferMoney(double money, Account account, String description) {
-		return true;
+	public double getInterest()
+	{
+		return interest;
 	}
 
+	public double getInterestRate()
+	{
+		return interestRate;
+	}
 
+	
+	public Account getAccount() {
+		return account;
+	}
+
+	
 }

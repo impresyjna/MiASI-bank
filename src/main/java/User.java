@@ -6,6 +6,7 @@ public class User {
 	private String surname; 
 	private List<Account> accounts;
 	private Bank bank = Bank.getInstance();
+	private List<Deposit> deposits;
 
 	public User(String name, String surname) {
 		this.name = name;
@@ -39,5 +40,10 @@ public class User {
 		if(account.closeAccount()){
 			accounts.remove(account);
 		}
+	}
+	
+
+	public void addDeposit(Deposit deposit){
+		this.deposits.add(deposit);
 	}
 }

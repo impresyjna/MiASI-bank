@@ -1,12 +1,12 @@
 
 public class Loan extends Account implements Interest{
-	private long accountId; 	
+	private Account account;
 	private double interest; 
 	private double interestPercent; 
 	private double balance; 
 	
-	private Loan(long accountId, double interest, double interestPercent, double balance){
-		this.accountId = accountId;
+	private Loan(Account account, double interest, double interestPercent, double balance){
+		this.account = account;
 		this.interest = interest;
 		this.interestPercent = interestPercent;
 		this.balance = balance;
@@ -27,12 +27,6 @@ public class Loan extends Account implements Interest{
 	public boolean closeAccount() {
 		//TODO:
 		return false;
-	}
-
-	@Override
-	public boolean addMoney(double money, String description) {
-		//TODO:
-		return true;
 	}
 
 	@Override
