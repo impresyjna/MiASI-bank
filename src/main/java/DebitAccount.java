@@ -6,7 +6,7 @@ public class DebitAccount extends Account implements Interest {
     private double limit;
     private Bank bank = Bank.getInstance();
 
-    public DebitAccount(double limit, double interestRate) {
+    public DebitAccount(double limit, double interestRate, User user) {
         this.limit = limit;
         this.startDate = new Date();
         this.balance = 0;
@@ -14,6 +14,7 @@ public class DebitAccount extends Account implements Interest {
         this.interestRate = interestRate;
         bank.addAccountToList(this);
         this.id = bank.getAccounts().lastIndexOf(this);
+        user.addAccount(this);
     }
 
     public double getInterest() {

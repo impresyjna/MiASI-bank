@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 
 import org.easymock.EasyMock;
+import org.junit.Before;
 
 /**
  * Created by marci on 23.03.2016.
@@ -11,13 +12,16 @@ import org.easymock.EasyMock;
 public class AccountTest extends TestCase {
 	
     Account account;
+    DebitAccount da;
     
+    @Before
     public void setUp() {
     	account = EasyMock.createMock(Account.class);
+    	da = new DebitAccount(-500,0.5, new User("",""));
     }
     
     public void testCase() {
-    	DebitAccount da = new DebitAccount(-1000.0, 0.5);
+//    	DebitAccount da = new DebitAccount(-1000.0, 0.5, new User("",""));
     	
     	EasyMock.expect(account.getBalance()).andReturn(0.0);
     	EasyMock.expect(account.getOperations()).andReturn(new ArrayList<Operation>());
@@ -32,20 +36,17 @@ public class AccountTest extends TestCase {
     }
     
     public void testCloseAccount_negativeBalance() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
         da.minusMoney(200,"");
         assertFalse(da.closeAccount());
     }
 
     public void testCloseAccount_ok() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
         da.minusMoney(200,"");
         da.addMoney(200,"");
         assertTrue(da.closeAccount());
     }
 
     public void testCloseAccountWithPlusBalance_ok() throws Exception {
-        DebitAccount da = new DebitAccount(-500, 0.5);
         da.addMoney(500, "Add money");
         assertTrue(da.closeAccount());
         assertTrue(da.getOperations().size()==2);
@@ -53,7 +54,6 @@ public class AccountTest extends TestCase {
     }
 
     public void testAddMoney_ok() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
         da.addMoney(500,"");
         assertTrue(da.getBalance()==500);
         assertTrue(da.getOperations().size()>0);
@@ -63,7 +63,6 @@ public class AccountTest extends TestCase {
     }
 
     public void testAddMoney_negativeMoney() throws Exception {
-        DebitAccount da = new DebitAccount(-500,0.5);
         assertFalse(da.addMoney(-500,""));
     }
 }

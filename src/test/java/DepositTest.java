@@ -1,13 +1,21 @@
 
 import java.util.Date;
 
+import org.junit.Before;
+
 import junit.framework.TestCase;
 
 
 public class DepositTest extends TestCase{
 
+	DebitAccount da;
+    
+    @Before
+    public void setUp() {
+    	da = new DebitAccount(-500,0.5, new User("",""));
+    }
+	
 	public void testCanNotCreate()	{
-		DebitAccount da = new DebitAccount(-500,0.5);   //limit
 		try {
 			Deposit deposit = Deposit.createDeposit(5000, 0.5, new Date(), da);
 			deposit.calculateInterest();
@@ -17,7 +25,6 @@ public class DepositTest extends TestCase{
 	}
 	
 	public void testCalculateInterest()	{
-		DebitAccount da = new DebitAccount(-500,0.5);  
 		try {
 			Deposit deposit = Deposit.createDeposit(500, 0.5, new Date(), da);
 			deposit.calculateInterest();
@@ -28,7 +35,6 @@ public class DepositTest extends TestCase{
 	}
 	
 	public void testCloseAccount_afterEnd() {
-		DebitAccount da = new DebitAccount(-500,0.5); 
 		Date date = new Date();
 		date.setTime(date.getTime()-100000);
 		try {
@@ -41,7 +47,6 @@ public class DepositTest extends TestCase{
 	}
 	
 	public void testCloseAccount_beforeEnd() {
-		DebitAccount da = new DebitAccount(-500,0.5); 
 		Date date = new Date();
 		date.setTime(date.getTime()+100000);
 		try {
@@ -53,8 +58,7 @@ public class DepositTest extends TestCase{
 		}
 	}
 	
-	public void testCloseAccount_secendClose() {
-		DebitAccount da = new DebitAccount(-500,0.5); 
+	public void testCloseAccount_secendClose() { 
 		try {
 			Deposit deposit = Deposit.createDeposit(500, 0.5, new Date(), da);
 			deposit.closeAccount();
