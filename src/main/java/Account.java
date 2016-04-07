@@ -32,7 +32,6 @@ public abstract class Account {
         if (money > 0) {
             Operation op = new Operation(money, new Date(), description, OperationType.AddMoney, this, balance);
             balance += money;
-            System.out.println(balance);
             operations.add(op);
             return true;
         } else {
@@ -41,12 +40,12 @@ public abstract class Account {
     }
 
     public void executeTransferMoney(double money, Account account, String description) {
-        Operation op = new Operation(money, new Date(), description, OperationType.TransferMoneyMinus, this, balance);
+    	Operation op = new Operation(money, new Date(), description, OperationType.TransferMoneyMinus, this, balance);
         op.setSecondAccountForTransfer(account);
         operations.add(op);
 
         Operation op2 = new Operation(money, new Date(), description, OperationType.TransferMoneyPlus, account, account.getBalance());
-        op.setSecondAccountForTransfer(this);
+        op2.setSecondAccountForTransfer(this);
         account.getOperations().add(op2);
 
         this.minusMoney(money, description);

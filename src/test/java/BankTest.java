@@ -1,5 +1,4 @@
 import junit.framework.TestCase;
-import org.easymock.EasyMock;
 import org.junit.Before;
 
 /**
@@ -19,8 +18,8 @@ public class BankTest extends TestCase {
         User user1 = new User("Testowy", "Test");
         assertFalse(bank.getUsers().isEmpty());
         assertTrue(bank.getUsers().size()>0);
-        assertTrue(user.getId() == 0);
-        assertTrue(user1.getId() == 1);
+        assertTrue(user.getId() == 2);
+        assertTrue(user1.getId() == 3);
     }
 
     public void testAddAccountToList() throws Exception {
