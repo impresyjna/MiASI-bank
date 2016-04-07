@@ -11,9 +11,8 @@ public class DepositTest extends TestCase{
 		try {
 			Deposit deposit = Deposit.createDeposit(5000, 0.5, new Date(), da);
 			deposit.calculateInterest();
-			assertFalse(deposit.getInterest()==2500);
+			fail();
 		} catch(NotEnoughMoneyException ex) {
-			assertTrue(da.getDeposits().isEmpty());
 		}
 	}
 	
