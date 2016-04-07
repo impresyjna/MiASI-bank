@@ -1,43 +1,39 @@
 
-public class Loan extends Account implements Interest{
-	private Account account;
-	private double interest; 
-	private double interestPercent; 
-	private double balance; 
-	
-	private Loan(Account account, double interest, double interestPercent, double balance){
-		this.account = account;
-		this.interest = interest;
-		this.interestPercent = interestPercent;
-		this.balance = balance;
-	}
-	
-	@Override
-	public void calculateInterest() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void payOffLoan(){
-		balance = 0; 
-		interest = 0; 
-	}
+public class Loan implements Interest {
+    private Account account;
+    private double interest;
+    private double interestPercent;
+    private double balance;
+    private CapitalizeType capitalizeType;
 
-	@Override
-	public boolean closeAccount() {
-		//TODO:
-		return false;
-	}
+    public Loan(Account account, double interestPercent, double balance, CapitalizeType capitalizeType) {
+        this.account = account;
+        this.interestPercent = interestPercent;
+        this.balance = balance;
+        this.capitalizeType = capitalizeType;
+    }
 
-	@Override
-	public boolean minusMoney(double money, String description) {
-		//TODO:
-		return true;
-	}
+    @Override
+    public void calculateInterest() {
+        interest = balance * Math.pow((interestPercent / 100.0), 1.0);
+        balance += interest;
+    }
 
-	@Override
-	public boolean transferMoney(double money, Account account, String description) {
-		//TODO:
-		return true;
-	}
+    public boolean payOffLoan(double instalment) {
+        if (instalment > 0) {
+            calculateInterest();
+            balance -= instalment;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
 }
