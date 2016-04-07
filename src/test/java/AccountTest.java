@@ -22,15 +22,13 @@ public class AccountTest extends TestCase {
     	EasyMock.expect(account.getBalance()).andReturn(0.0);
     	EasyMock.expect(account.getOperations()).andReturn(new ArrayList<Operation>());
     	EasyMock.expect(account.addMoney(50.0,"")).andReturn(true);
-    	account.executeTransferMoney(50.0, da, "");
     	
     	EasyMock.replay(account);
     	
-    	account.executeTransferMoney(50, da, "");
     	da.executeTransferMoney(50, account, "");
     	assertTrue(da.getBalance()==-50);
     	
-    	EasyMock.verify();
+    	EasyMock.verify();   	
     }
     
     public void testCloseAccount_negativeBalance() throws Exception {
