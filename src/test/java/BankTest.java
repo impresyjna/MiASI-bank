@@ -1,11 +1,18 @@
 import junit.framework.TestCase;
+import org.easymock.EasyMock;
+import org.junit.Before;
 
 /**
  * Created by impresyjna on 01.04.2016.
  */
 public class BankTest extends TestCase {
     private Bank bank = Bank.getInstance();
+    private User user;
 
+    @Before
+    protected void setUp() throws Exception {
+        user = new User("Test", "Testowy"); 
+    }
 
     public void testAddUserToList() throws Exception {
         User user = new User("Test", "Testowy");
@@ -17,8 +24,8 @@ public class BankTest extends TestCase {
     }
 
     public void testAddAccountToList() throws Exception {
-        NonDebitAccount nonDebitAccount = new NonDebitAccount();
-        NonDebitAccount nonDebitAccount1 = new NonDebitAccount();
+        NonDebitAccount nonDebitAccount = new NonDebitAccount(user);
+        NonDebitAccount nonDebitAccount1 = new NonDebitAccount(user);
         assertFalse(bank.getAccounts().isEmpty());
         assertTrue(bank.getAccounts().size()>0);
     }

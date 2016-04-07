@@ -1,12 +1,13 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
 	private int id; 
 	private String name; 
 	private String surname; 
-	private List<Account> accounts;
+	private List<Account> accounts = new ArrayList<>();
 	private Bank bank = Bank.getInstance();
-	private List<Deposit> deposits;
+	private List<Deposit> deposits = new ArrayList<>();
 
 	public User(String name, String surname) {
 		this.name = name;

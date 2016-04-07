@@ -1,25 +1,34 @@
 import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by marci on 23.03.2016.
  */
 public class NonDebitAccountTest extends TestCase {
+    private User user;
+
+    @Before
+    protected void setUp() throws Exception {
+        user = new User("Test", "Testowy");
+    }
 
     public void testMinusMoney_overLimit() throws Exception {
-        NonDebitAccount nda = new NonDebitAccount();
+        NonDebitAccount nda = new NonDebitAccount(user);
         assertFalse(nda.minusMoney(1000,""));
     }
 
     public void testMinusMoney_negativeMoney() throws Exception {
-        NonDebitAccount nda = new NonDebitAccount();
+        NonDebitAccount nda = new NonDebitAccount(user);
         nda.addMoney(1000,"");
         assertFalse(nda.minusMoney(-500,""));
     }
 
+    @Test
     public void testMinusMoney_ok() throws Exception {
-        NonDebitAccount nda = new NonDebitAccount();
-        nda.addMoney(1000,"");
-        nda.minusMoney(500,"");
+        NonDebitAccount nda = new NonDebitAccount(user);
+        nda.addMoney(1000, "");
+        nda.minusMoney(500, "");
         assertTrue(nda.getBalance()==500);
         assertTrue(nda.getOperations().size()>1);
         assertTrue(nda.getOperations().get(1).getBalance() == 500);
@@ -28,27 +37,27 @@ public class NonDebitAccountTest extends TestCase {
     }
 
     public void testTransferMoney_negativeMoney() throws Exception {
-        NonDebitAccount nda1 = new NonDebitAccount();
-        NonDebitAccount nda2 = new NonDebitAccount();
+        NonDebitAccount nda1 = new NonDebitAccount(user);
+        NonDebitAccount nda2 = new NonDebitAccount(user);
         assertFalse(nda1.transferMoney(-5,nda2,""));
     }
 
     public void testTransferMoney_closeAccount() throws Exception {
-        NonDebitAccount nda1 = new NonDebitAccount();
-        NonDebitAccount nda2 = new NonDebitAccount();
+        NonDebitAccount nda1 = new NonDebitAccount(user);
+        NonDebitAccount nda2 = new NonDebitAccount(user);
         nda2.closeAccount();
         assertFalse(nda1.transferMoney(5,nda2,""));
     }
 
     public void testTransferMoney_overLimit() throws Exception {
-        NonDebitAccount nda1 = new NonDebitAccount();
-        NonDebitAccount nda2 = new NonDebitAccount();
+        NonDebitAccount nda1 = new NonDebitAccount(user);
+        NonDebitAccount nda2 = new NonDebitAccount(user);
         assertFalse(nda1.transferMoney(600,nda2,""));
     }
 
     public void testTransferMoney_ok() throws Exception {
-        NonDebitAccount nda1 = new NonDebitAccount();
-        NonDebitAccount nda2 = new NonDebitAccount();
+        NonDebitAccount nda1 = new NonDebitAccount(user);
+        NonDebitAccount nda2 = new NonDebitAccount(user);
         nda1.addMoney(1000,"");
         assertTrue(nda1.transferMoney(400,nda2,""));
         assertTrue(nda1.getBalance()==600);
