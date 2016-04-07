@@ -63,10 +63,6 @@ public abstract class Account {
     public List<Operation> getOperations() {
         return operations;
     }
-    
-    public List<Deposit> getDeposits() {
-        return deposits;
-    }
 
     public void addDeposit(Deposit deposit) {
     	this.deposits.add(deposit);

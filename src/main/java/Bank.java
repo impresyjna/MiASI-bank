@@ -27,11 +27,4 @@ public class Bank {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }
