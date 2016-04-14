@@ -17,7 +17,7 @@ public class DepositTest extends TestCase{
 	
 	public void testCanNotCreate()	{
 		try {
-			Deposit deposit = Deposit.createDeposit(5000, 0.5, new Date(), da);
+			Deposit deposit = Deposit.createDeposit(5000, 0.5, new Date(), da, CapitalizeType.AtTheEndOfDeposit);
 			deposit.calculateInterest();
 			fail();
 		} catch(NotEnoughMoneyException ex) {
@@ -26,7 +26,7 @@ public class DepositTest extends TestCase{
 	
 	public void testCalculateInterest()	{
 		try {
-			Deposit deposit = Deposit.createDeposit(500, 0.5, new Date(), da);
+			Deposit deposit = Deposit.createDeposit(500, 0.5, new Date(), da, CapitalizeType.AtTheEndOfDeposit);
 			deposit.calculateInterest();
 			assertTrue(deposit.getInterest()==250);
 		} catch(NotEnoughMoneyException ex) {
@@ -38,7 +38,7 @@ public class DepositTest extends TestCase{
 		Date date = new Date();
 		date.setTime(date.getTime()-100000);
 		try {
-			Deposit deposit = Deposit.createDeposit(500, 0.5, date, da);
+			Deposit deposit = Deposit.createDeposit(500, 0.5, date, da, CapitalizeType.AtTheEndOfDeposit);
 			assertTrue(deposit.closeAccount());
 			assertTrue(da.getBalance()==250);
 		} catch(NotEnoughMoneyException ex) {
@@ -50,7 +50,7 @@ public class DepositTest extends TestCase{
 		Date date = new Date();
 		date.setTime(date.getTime()+100000);
 		try {
-			Deposit deposit = Deposit.createDeposit(500, 0.5, date, da);
+			Deposit deposit = Deposit.createDeposit(500, 0.5, date, da, CapitalizeType.AtTheEndOfDeposit);
 			assertTrue(deposit.closeAccount());
 			assertTrue(da.getBalance()==0);
 		} catch(NotEnoughMoneyException ex) {
@@ -60,7 +60,7 @@ public class DepositTest extends TestCase{
 	
 	public void testCloseAccount_secendClose() { 
 		try {
-			Deposit deposit = Deposit.createDeposit(500, 0.5, new Date(), da);
+			Deposit deposit = Deposit.createDeposit(500, 0.5, new Date(), da, CapitalizeType.AtTheEndOfDeposit);
 			deposit.closeAccount();
 			assertFalse(deposit.closeAccount());
 		} catch(NotEnoughMoneyException ex) {

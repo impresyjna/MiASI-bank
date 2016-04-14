@@ -9,16 +9,17 @@ public class Deposit implements Interest  {
 	private double interestRate;
 	private boolean open;
     private double balance;
+	private CapitalizeType capitalizeType;
 
-    public static Deposit createDeposit(double balance, double interestRate, Date endDate, Account account) throws NotEnoughMoneyException {
+    public static Deposit createDeposit(double balance, double interestRate, Date endDate, Account account, CapitalizeType capitalizeType) throws NotEnoughMoneyException {
     	if(account.minusMoney(balance, "create deposit")) {
-    		return new Deposit(balance, interestRate, endDate, account);
+    		return new Deposit(balance, interestRate, endDate, account, capitalizeType);
     	}else {
     		throw new NotEnoughMoneyException();
     	}
     }
     
-	private Deposit(double balance, double interestRate, Date endDate, Account account){
+	private Deposit(double balance, double interestRate, Date endDate, Account account, CapitalizeType capitalizeType){
 		account.addDeposit(this);
 		this.startDate = new Date();
 		this.endDate=endDate;
@@ -26,11 +27,13 @@ public class Deposit implements Interest  {
 		this.balance = balance;
 		this.interestRate = interestRate;
 		this.account = account;
+		this.capitalizeType = capitalizeType;
 	}
 
 	@Override
 	public void calculateInterest() {
-		interest = balance * interestRate;
+		interest = balance * Math.pow(interestRate / (capitalizeType.getCapitalizeDivider()), capitalizeType.getCapitalizePower(startDate,new Date()));
+		System.out.println(interest);
 	}
 
 	public boolean closeAccount() {
