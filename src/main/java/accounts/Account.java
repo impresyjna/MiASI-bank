@@ -92,8 +92,13 @@ public class Account {
         this.history = history;
     }
 
-    public void doOperation(Operation operation){
-        operation.execute();
-        history.log(operation);
+    public boolean doOperation(Operation operation){
+        boolean correct = operation.execute();
+        if(correct) history.log(operation);
+        return correct;
+    }
+
+    public void addDeposit(Deposit deposit){
+        this.deposits.add(deposit);
     }
 }
