@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  */
 public class LoanTest {
 
-    @Test
+    /* @Test
     public void testCalculateInterest() throws Exception {
         User user = new User("Test", "Testowy");
         NonDebitAccount nonDebitAccount = new NonDebitAccount(user);
@@ -35,5 +35,5 @@ public class LoanTest {
         NonDebitAccount nonDebitAccount = new NonDebitAccount(user);
         Loan loan = new Loan(nonDebitAccount, 5, 1000, CapitalizeType.Yearly);
         assertFalse(loan.payOffLoan(-100));
-    }
+    } */
 }

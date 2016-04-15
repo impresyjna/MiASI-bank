@@ -8,7 +8,7 @@ import util.User;
  */
 public class DebitAccountTest extends TestCase {
 
-	DebitAccount da;
+	/* DebitAccount da;
     
     @Before
     public void setUp() {
@@ -76,6 +76,6 @@ public class DebitAccountTest extends TestCase {
         assertTrue(da2.getOperations().get(0).getType() == OperationType.TransferMoneyPlus);
         assertTrue(da2.getOperations().get(0).getBalance() == 400);
         assertTrue(da2.getOperations().get(0).getOldBalance() == 0);
-    }
+    } */
 
 }

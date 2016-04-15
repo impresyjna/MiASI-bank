@@ -12,7 +12,7 @@ public class User {
 	private String name; 
 	private String surname; 
 	private List<Account> accounts = new ArrayList<>();
-	private Bank bank = Bank.getInstance();
+	private Bank bank = new Bank();
 	private List<Deposit> deposits = new ArrayList<>();
 
 	public User(String name, String surname) {

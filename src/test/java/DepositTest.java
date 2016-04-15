@@ -12,7 +12,7 @@ import util.User;
 
 public class DepositTest extends TestCase{
 
-	DebitAccount da;
+	/* DebitAccount da;
     
     @Before
     public void setUp() {
@@ -70,5 +70,5 @@ public class DepositTest extends TestCase{
 		} catch(NotEnoughMoneyException ex) {
 			fail();
 		}
-	}
+	} */
 }
