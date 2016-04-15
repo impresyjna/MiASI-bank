@@ -1,6 +1,13 @@
+package accounts;
+
+import enums.CapitalizeType;
+import exceptions.NotEnoughMoneyException;
+import operations.Interest;
+import operations.Substract;
+
 import java.util.Date;
 
-public class Deposit implements Interest  {
+public class Deposit implements Interest {
 	private Account account;
 	private Date startDate;
 	private Date endDate;
@@ -12,7 +19,7 @@ public class Deposit implements Interest  {
 	private CapitalizeType capitalizeType;
 
     public static Deposit createDeposit(double balance, double interestRate, Date endDate, Account account, CapitalizeType capitalizeType) throws NotEnoughMoneyException {
-    	if(account.minusMoney(balance, "create deposit")) {
+    	if(account.doOperation(new Substract(account, balance))) {
     		return new Deposit(balance, interestRate, endDate, account, capitalizeType);
     	}else {
     		throw new NotEnoughMoneyException();
@@ -37,16 +44,18 @@ public class Deposit implements Interest  {
 	}
 
 	public boolean closeAccount() {
-		if(this.open){
+		//TODO:
+		/* if(this.open){
 			if(new Date().after(endDate)) {
 				calculateInterest();
 			}
-			account.addMoney(balance+interest, "close deposit");
+			account.doOperation(balance+interest, "close deposit");
 			this.open = false;
 			return true;
 		} else {
 			return false;
-		}
+		} */
+		return true;
 	}
 
 	public Date getEndDate()
