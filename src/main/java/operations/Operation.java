@@ -1,7 +1,14 @@
+package operations;
+
+import accounts.Account;
+import enums.OperationType;
+
 import java.util.Date;
 
-public class Operation {
-	private Date executionTime;
+public abstract class Operation {
+
+	public abstract boolean execute();
+	/* private Date executionTime;
 	private String description;
 	private OperationType type;
 	private Account account;
@@ -48,5 +55,5 @@ public class Operation {
 
 	public Account getSecondAccountForTransfer() {
 		return secondAccountForTransfer;
-	}
+	} */
 }
