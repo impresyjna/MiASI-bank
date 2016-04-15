@@ -1,4 +1,3 @@
-import enums.OperationType;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;

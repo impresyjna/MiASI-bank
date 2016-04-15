@@ -1,5 +1,4 @@
 import accounts.Account;
-import enums.OperationType;
 import junit.framework.TestCase;
 
 
