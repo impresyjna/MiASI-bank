@@ -1,3 +1,9 @@
+package accounts;
+
+import accounts.Account;
+import enums.CapitalizeType;
+import operations.Interest;
+
 import java.util.Date;
 
 public class Loan implements Interest {
@@ -13,7 +19,7 @@ public class Loan implements Interest {
         this.interestPercent = interestPercent;
         this.balance = balance;
         this.capitalizeType = capitalizeType;
-        this.startDate = new Date(); 
+        this.startDate = new Date();
     }
 
     @Override
