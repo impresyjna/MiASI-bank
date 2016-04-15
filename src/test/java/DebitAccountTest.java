@@ -1,6 +1,8 @@
+import enums.OperationType;
 import org.junit.Before;
 
 import junit.framework.TestCase;
+import util.User;
 
 /**
  * Created by inf109754 on 2016-03-18.

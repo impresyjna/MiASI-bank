@@ -1,5 +1,7 @@
 import junit.framework.TestCase;
 import org.junit.Before;
+import util.Bank;
+import util.User;
 
 /**
  * Created by impresyjna on 01.04.2016.

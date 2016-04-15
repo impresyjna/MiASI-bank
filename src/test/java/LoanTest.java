@@ -1,4 +1,7 @@
+import accounts.Loan;
+import enums.CapitalizeType;
 import org.junit.Test;
+import util.User;
 
 import static org.junit.Assert.*;
 

@@ -1,9 +1,13 @@
 
 import java.util.Date;
 
+import accounts.Deposit;
+import enums.CapitalizeType;
+import exceptions.NotEnoughMoneyException;
 import org.junit.Before;
 
 import junit.framework.TestCase;
+import util.User;
 
 
 public class DepositTest extends TestCase{

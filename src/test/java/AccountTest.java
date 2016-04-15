@@ -1,10 +1,14 @@
+import accounts.Account;
+import enums.OperationType;
 import junit.framework.TestCase;
 
 
 import java.util.ArrayList;
 
+import operations.Operation;
 import org.easymock.EasyMock;
 import org.junit.Before;
+import util.User;
 
 /**
  * Created by marci on 23.03.2016.
