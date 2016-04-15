@@ -1,3 +1,9 @@
+package util;
+
+import accounts.Account;
+import accounts.Deposit;
+import operations.CloseAccount;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +40,11 @@ public class User {
 
 	public void addAccount(Account account){
 		this.accounts.add(account);
-		account.setOwnerId(this.id);
+		account.setOwner(this);
 	}
 
 	public void removeAccount(Account account){
-		if(account.closeAccount()){
+		if(account.doOperation(new CloseAccount(account))){
 			accounts.remove(account);
 		}
 	}
