@@ -26,6 +26,8 @@ public class TransferTest extends TestCase {
     public void testCorrectTransfer() throws Exception {
         Transfer operation = new Transfer(from,to,100);
         assertTrue(operation.execute());
+        assertTrue(from.getBalance()==900);
+        assertTrue(to.getBalance()==1100);
     }
 
     public void testAmountEqualsZero() throws Exception {
