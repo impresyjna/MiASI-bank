@@ -9,11 +9,9 @@ import operations.Transfer;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO:
 public class Bank {
     private List<User> users = new ArrayList<>();
     private List<Account> accounts = new ArrayList<>();
-
 
     public List<User> getUsers() {
         return users;
