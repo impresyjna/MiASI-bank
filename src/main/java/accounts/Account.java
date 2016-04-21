@@ -20,11 +20,11 @@ public class Account {
     private List<Deposit> deposits = new ArrayList<>();
 
 
-    public Account(User owner, Date startDate, double balance, boolean open, double limit) {
+    public Account(User owner, double balance, double limit) {
         this.owner = owner;
-        this.startDate = startDate;
+        this.startDate = new Date();
         this.balance = balance;
-        this.open = open;
+        this.open = true;
         this.limit = limit;
     }
 
