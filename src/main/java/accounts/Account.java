@@ -1,6 +1,9 @@
 package accounts;
 
+import operations.Income;
 import operations.Operation;
+import operations.Substract;
+import operations.Transfer;
 import util.History;
 import util.User;
 
@@ -8,24 +11,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Account {
+//TODO: Numer konta
+public class Account implements AccountInterface {
     private User owner;
     private long id;
     private Date startDate;
     private double balance;
     private boolean open;
-    private double limit;
     private History history = new History();
 
     private List<Deposit> deposits = new ArrayList<>();
 
 
-    public Account(User owner, double balance, double limit) {
+    public Account(User owner, double balance) {
         this.owner = owner;
         this.startDate = new Date();
         this.balance = balance;
         this.open = true;
-        this.limit = limit;
     }
 
     public User getOwner() {
@@ -68,14 +70,6 @@ public class Account {
         this.open = open;
     }
 
-    public double getLimit() {
-        return limit;
-    }
-
-    public void setLimit(double limit) {
-        this.limit = limit;
-    }
-
     public List<Deposit> getDeposits() {
         return deposits;
     }
@@ -97,6 +91,25 @@ public class Account {
         if(correct) history.log(operation);
         return correct;
     }
+
+    @Override
+    public boolean income(double amount) {
+        Income operation = new Income(this, amount);
+        return this.doOperation(operation);
+    }
+
+    @Override
+    public boolean substract(double amount) {
+        Substract operation = new Substract(this, amount);
+        return this.doOperation(operation);
+    }
+
+    @Override
+    public boolean transfer(Account to, double amount) {
+        Transfer operation = new Transfer(this, to, amount);
+        return this.doOperation(operation);
+    }
+
 
     public void addDeposit(Deposit deposit){
         this.deposits.add(deposit);

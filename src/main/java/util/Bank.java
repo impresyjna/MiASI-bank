@@ -9,6 +9,9 @@ import operations.Transfer;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Wzorzecz State do naliczania odsetek
+//TODO: Wzorzec Decorator (do konta debetowego)
+//TODO: Wzorzec mediator do rozliczeń międzybankowych (ELIXIR)
 public class Bank {
     private List<User> users = new ArrayList<>();
     private List<Account> accounts = new ArrayList<>();
