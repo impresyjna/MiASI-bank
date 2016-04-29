@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by impresyjna on 21.04.2016.
  */
 public class IncomeTest extends TestCase {
-    private Account account;
+    /* private Account account;
 
     @Before
     public void setUp() throws Exception {
@@ -29,5 +29,5 @@ public class IncomeTest extends TestCase {
         Income operation = new Income(account, 100);
         assertTrue(operation.execute());
         assertTrue(account.getBalance() == 1100);
-    }
+    } */
 }

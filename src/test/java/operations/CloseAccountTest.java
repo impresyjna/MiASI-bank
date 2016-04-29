@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by impresyjna on 21.04.2016.
  */
 public class CloseAccountTest extends TestCase {
-    private Account account;
+    /* private Account account;
     private CloseAccount operation;
 
     @Before
@@ -40,5 +40,5 @@ public class CloseAccountTest extends TestCase {
     public void testBalanceLessThanZero() throws Exception {
         account.setBalance(-100);
         assertFalse(operation.execute());
-    }
+    } */
 }

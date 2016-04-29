@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by impresyjna on 21.04.2016.
  */
 public class SubstractTest extends TestCase {
-    private Account account;
+    /* private Account account;
 
     @Before
     public void setUp() throws Exception {
@@ -34,6 +34,6 @@ public class SubstractTest extends TestCase {
         Substract operation = new Substract(account, 100);
         assertTrue(operation.execute());
         assertTrue(account.getBalance() == 900);
-    }
+    } */
 
 }

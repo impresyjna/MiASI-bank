@@ -16,7 +16,7 @@ import util.User;
  */
 public class AccountTest extends TestCase {
 	
-    Account account;
+   /*  Account account;
     
     @Before
     public void setUp() {
@@ -33,6 +33,6 @@ public class AccountTest extends TestCase {
     public void testDoIncorrectOperation() throws Exception {
         assertFalse(account.doOperation(new Substract(account,1100)));
         assertTrue(account.getHistory().getOperationList().isEmpty());
-    }
+    } */
    
 }

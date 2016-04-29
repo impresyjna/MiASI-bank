@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class TransferTest extends TestCase {
 
-    private Account from;
+   /*  private Account from;
     private Account to;
 
     @Before
@@ -50,6 +50,6 @@ public class TransferTest extends TestCase {
     public void testAmountMoreThanBalanceInFrom() throws Exception {
         Transfer operation = new Transfer(from,to,1100);
         assertFalse(operation.execute());
-    }
+    } */
 
 }

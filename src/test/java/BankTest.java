@@ -1,14 +1,44 @@
 import accounts.Account;
+import accounts.AccountDecorator;
+import accounts.AccountInterface;
 import junit.framework.TestCase;
 import org.junit.Before;
 import util.Bank;
+import util.Over1000Report;
+import util.PassAllReport;
 import util.User;
+
+import java.util.List;
 
 /**
  * Created by impresyjna on 01.04.2016.
  */
 public class BankTest extends TestCase {
-    private Account account;
+    private Bank bank;
+
+    @Before
+    protected void setUp() throws Exception {
+        bank = new Bank();
+    }
+
+    public void testPassAllReportDoReport() throws Exception {
+        User user = new User("Zbigniew", "Testowy");
+        Account account = new Account(user, 1100, bank);
+        Account account1 = new Account(user, 500, bank);
+        AccountDecorator accountDecorator = new AccountDecorator(account, 100, bank);
+        List<AccountInterface> accounts = bank.doReport(new PassAllReport());
+        assertTrue(accounts.size()==3);
+    }
+
+    public void testOver1000ReportDoReport() throws Exception {
+        User user = new User("Zbigniew", "Testowy");
+        Account account = new Account(user, 1100, bank);
+        Account account1 = new Account(user, 500, bank);
+        AccountDecorator accountDecorator = new AccountDecorator(account, 100, bank);
+        List<AccountInterface> accounts = bank.doReport(new Over1000Report());
+        assertTrue(accounts.size()==1);
+    }
+    /* private Account account;
     private User user;
     private Bank bank;
 
@@ -43,5 +73,5 @@ public class BankTest extends TestCase {
     public void testTransferWithoutEnoughMoney() throws Exception {
         Account accountTo = new Account(user, 1000, 0);
         assertFalse(bank.transfer(account,accountTo,1600));
-    }
+    } */
 }

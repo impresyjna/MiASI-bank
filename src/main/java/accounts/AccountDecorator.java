@@ -2,6 +2,8 @@ package accounts;
 
 import operations.Operation;
 import operations.TransferForDebit;
+import util.Bank;
+import util.VisitorInterface;
 
 /**
  * Created by impresyjna on 22.04.2016.
@@ -10,11 +12,13 @@ public class AccountDecorator implements AccountInterface{
     private double limit;
     private double debit; //To jest dodatnia reprezentacja ujemnej wartości :D
     private Account account;
+    private long id;
 
-    public AccountDecorator(Account account, double limit) {
+    public AccountDecorator(Account account, double limit, Bank bank) {
         this.account = account;
         this.limit = limit;
         this.debit = 0;
+        bank.addAccountToList(this);
     }
 
     @Override
@@ -66,5 +70,15 @@ public class AccountDecorator implements AccountInterface{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public AccountInterface accept(VisitorInterface visitor) {
+        return visitor.visit(this);
+    }
+
+    @Override
+    public long getId() {
+        return id;
     }
 }
