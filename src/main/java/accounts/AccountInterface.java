@@ -9,7 +9,7 @@ public interface AccountInterface {
     boolean income(double amount);
     boolean substract(double amount);
     boolean transfer(Account to, double amount);
-    Void accept(VisitorInterface visitor);
+    Object accept(VisitorInterface visitor);
     //TODO: Lepsze zwracanie obiektu z interfejsu
     long getId();
 }

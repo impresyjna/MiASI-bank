@@ -73,7 +73,7 @@ public class AccountDecorator implements AccountInterface{
     }
 
     @Override
-    public AccountInterface accept(VisitorInterface visitor) {
+    public Object accept(VisitorInterface visitor) {
         return visitor.visit(this);
     }
 

@@ -115,7 +115,7 @@ public class Account implements AccountInterface {
     }
 
     @Override
-    public Void accept(VisitorInterface visitor) {
+    public Object accept(VisitorInterface visitor) {
         return visitor.visit(this);
     }
 

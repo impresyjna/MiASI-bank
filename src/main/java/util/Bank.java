@@ -54,9 +54,9 @@ public class Bank {
     public List<AccountInterface> doReport(VisitorInterface visitor) {
         List<AccountInterface> result = new ArrayList<>();
         for (AccountInterface account : accounts) {
-            AccountInterface acc = account.accept(visitor);
+            AccountInterface acc = (AccountInterface) account.accept(visitor);
             if (acc != null) {
-                result.add(account.accept(visitor));
+                result.add(acc);
             }
         }
         return result;
@@ -65,7 +65,7 @@ public class Bank {
     public double doSumReport(VisitorInterface visitor) {
         double sum = 0;
         for (AccountInterface account : accounts) {
-            double value = account.acceptDouble(visitor);
+            double value = (double) account.accept(visitor);
             sum += value;
         }
         return sum;
