@@ -10,12 +10,12 @@ import accounts.AccountInterface;
 public class SumAllBalances implements VisitorInterface {
 
     @Override
-    public AccountInterface visit(Account account) {
-        return null;
+    public Object visit(Account account) {
+        return account.getBalance();
     }
 
     @Override
-    public AccountInterface visit(AccountDecorator accountDecorator) {
-        return null;
+    public Object visit(AccountDecorator accountDecorator) {
+        return accountDecorator.getBalance();
     }
 }

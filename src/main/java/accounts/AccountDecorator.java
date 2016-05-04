@@ -1,6 +1,5 @@
 package accounts;
 
-import operations.Operation;
 import operations.TransferForDebit;
 import util.Bank;
 import util.VisitorInterface;
@@ -19,6 +18,10 @@ public class AccountDecorator implements AccountInterface{
         this.limit = limit;
         this.debit = 0;
         bank.addAccountToList(this);
+    }
+
+    public double getBalance(){
+        return -1 * debit;
     }
 
     @Override

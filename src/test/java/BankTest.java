@@ -3,10 +3,7 @@ import accounts.AccountDecorator;
 import accounts.AccountInterface;
 import junit.framework.TestCase;
 import org.junit.Before;
-import util.Bank;
-import util.Over1000Report;
-import util.PassAllReport;
-import util.User;
+import util.*;
 
 import java.util.List;
 
@@ -37,6 +34,16 @@ public class BankTest extends TestCase {
         AccountDecorator accountDecorator = new AccountDecorator(account, 100, bank);
         List<AccountInterface> accounts = bank.doReport(new Over1000Report());
         assertTrue(accounts.size()==1);
+    }
+
+    public void testSumAllBalancesDoReport() throws Exception {
+        User user = new User("Zbigniew", "Testowy");
+        Account account = new Account(user, 1100, bank);
+        Account account1 = new Account(user, 500, bank);
+        AccountDecorator accountDecorator = new AccountDecorator(account, 100, bank);
+        double sumBalances = bank.doSumReport(new SumAllBalances());
+        assertTrue(sumBalances==1600)
+        ;
     }
     /* private Account account;
     private User user;
