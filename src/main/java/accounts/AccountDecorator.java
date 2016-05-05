@@ -7,7 +7,7 @@ import util.VisitorInterface;
 /**
  * Created by impresyjna on 22.04.2016.
  */
-public class AccountDecorator implements AccountInterface{
+public class AccountDecorator implements AccountInterface {
     private double limit;
     private double debit; //To jest dodatnia reprezentacja ujemnej wartości :D
     private Account account;
@@ -20,20 +20,19 @@ public class AccountDecorator implements AccountInterface{
         bank.addAccountToList(this);
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return -1 * debit;
     }
 
     @Override
     //TODO: Dodać logi
     public boolean income(double amount) {
-        if(debit>0){
+        if (debit > 0 && amount > 0) {
             double tempValue = amount - debit;
-            if(tempValue>0){
+            if (tempValue > 0) {
                 debit = 0;
-                account.income(tempValue);
-                return true;
-            } else if (tempValue==0) {
+                return account.income(tempValue);
+            } else if (tempValue == 0) {
                 debit = 0;
                 return true;
             } else {
@@ -47,14 +46,15 @@ public class AccountDecorator implements AccountInterface{
     @Override
     //TODO: LOGI
     public boolean substract(double amount) {
-        if(account.getBalance()>=amount) {
-            account.substract(amount);
-            return true;
-        } else if(account.getBalance()+this.limit - this.debit >= amount){
-            account.substract(account.getBalance());
-            double tempAmount = amount - account.getBalance();
-            debit += tempAmount;
-            return true;
+        if (amount > 0) {
+            if (account.getBalance() >= amount) {
+                return account.substract(amount);
+            } else if (account.getBalance() + this.limit - this.debit >= amount) {
+                double tempAmount = amount - account.getBalance();
+                debit += tempAmount;
+                return account.substract(account.getBalance());
+            }
+            return false;
         }
         return false;
     }
@@ -62,15 +62,16 @@ public class AccountDecorator implements AccountInterface{
     @Override
     //TODO: LOGI
     public boolean transfer(Account to, double amount) {
-        if(account.getBalance()>=amount) {
-            account.transfer(to, amount);
-            return true;
-        } else if(account.getBalance()+this.limit - this.debit >= amount){
-            double tempAmount = amount - account.getBalance();
-            TransferForDebit operation = new TransferForDebit(account, to, amount, account.getBalance());
-            account.doOperation(operation);
-            debit += tempAmount;
-            return true;
+        if (amount > 0) {
+            if (account.getBalance() >= amount) {
+                return account.transfer(to, amount);
+            } else if (account.getBalance() + this.limit - this.debit >= amount) {
+                double tempAmount = amount - account.getBalance();
+                TransferForDebit operation = new TransferForDebit(account, to, amount, account.getBalance());
+                debit += tempAmount;
+                return account.doOperation(operation);
+            }
+            return false;
         }
         return false;
     }
@@ -91,5 +92,9 @@ public class AccountDecorator implements AccountInterface{
 
     public double getDebit() {
         return debit;
+    }
+
+    public void setDebit(double debit) {
+        this.debit = debit;
     }
 }
