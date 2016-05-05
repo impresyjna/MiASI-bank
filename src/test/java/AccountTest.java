@@ -9,6 +9,9 @@ import operations.Operation;
 import operations.Substract;
 import org.easymock.EasyMock;
 import org.junit.Before;
+
+import util.Bank;
+import util.Mediator;
 import util.User;
 
 /**
@@ -16,13 +19,14 @@ import util.User;
  */
 public class AccountTest extends TestCase {
 	
-   /*  Account account;
+    Account account;
     
     @Before
     public void setUp() {
     	//account = EasyMock.createMock(Account.class);
+    	Bank bank = new Bank(new Mediator(),"00000001");
         User user = new User("Zbigniew", "Testowy");
-        account = new Account(user, 1000, 0);
+        account = new Account(user, 1000, bank);
     }
 
     public void testDoCorrectOperation() throws Exception {
@@ -33,6 +37,6 @@ public class AccountTest extends TestCase {
     public void testDoIncorrectOperation() throws Exception {
         assertFalse(account.doOperation(new Substract(account,1100)));
         assertTrue(account.getHistory().getOperationList().isEmpty());
-    } */
+    } 
    
 }

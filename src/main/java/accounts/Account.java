@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//TODO: Numer konta
 public class Account implements AccountInterface {
     private User owner;
     private String id;
