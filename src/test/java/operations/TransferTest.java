@@ -4,6 +4,7 @@ import accounts.Account;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import util.Bank;
 import util.User;
 
 import static org.junit.Assert.*;
@@ -13,14 +14,16 @@ import static org.junit.Assert.*;
  */
 public class TransferTest extends TestCase {
 
-   /*  private Account from;
+    private Account from;
     private Account to;
+    private Bank bank;
 
     @Before
     public void setUp() throws Exception {
+        bank = new Bank();
         User user = new User("Zbigniew", "Testowy");
-        from = new Account(user, 1000, 0);
-        to = new Account(user,1000,0);
+        from = new Account(user, 1000, bank);
+        to = new Account(user,1000, bank);
     }
 
     public void testCorrectTransfer() throws Exception {
@@ -50,6 +53,6 @@ public class TransferTest extends TestCase {
     public void testAmountMoreThanBalanceInFrom() throws Exception {
         Transfer operation = new Transfer(from,to,1100);
         assertFalse(operation.execute());
-    } */
+    }
 
 }

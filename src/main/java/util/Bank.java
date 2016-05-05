@@ -13,7 +13,6 @@ import java.util.List;
 //TODO: Wzorzecz State do naliczania odsetek
 //TODO: Wzorzec Decorator (do konta debetowego)
 //TODO: Wzorzec mediator do rozliczeń międzybankowych (ELIXIR)
-//TODO: Wzorzec Visitor do tworzenia raportów (wybiera obiekty które pasują i odwiedzając je zbiera informacje i tworzy raport)
 //TODO: Nadawanie numeru konta
 //TODO: Identyfikator banku
 public class Bank {

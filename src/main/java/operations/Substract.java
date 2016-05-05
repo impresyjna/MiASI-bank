@@ -11,7 +11,6 @@ public class Substract extends Operation{
         this.amount = amount;
     }
 
-    //TODO: Zwrócić na to uwagę z tym >=0
     @Override
     public boolean execute() {
         if(amount>0 && (account.getBalance()-amount>=0)){

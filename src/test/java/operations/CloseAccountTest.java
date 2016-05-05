@@ -1,9 +1,11 @@
 package operations;
 
 import accounts.Account;
+import accounts.AccountDecorator;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import util.Bank;
 import util.User;
 
 import static org.junit.Assert.*;
@@ -12,19 +14,22 @@ import static org.junit.Assert.*;
  * Created by impresyjna on 21.04.2016.
  */
 public class CloseAccountTest extends TestCase {
-    /* private Account account;
+    private Account account;
+    private AccountDecorator accountDecorator;
     private CloseAccount operation;
+    private Bank bank;
 
     @Before
     public void setUp() throws Exception {
+        bank = new Bank();
         User user = new User("Zbigniew", "Testowy");
-        account = new Account(user, 1000, -500);
+        account = new Account(user, 1000, bank);
+        accountDecorator = new AccountDecorator(account, 500, bank);
         operation = new CloseAccount(account);
     }
 
     public void testBalanceZeroAndAccountOpen() throws Exception {
-        account.setBalance(0);
-        account.setOpen(true);
+        accountDecorator.substract(1000);
         assertTrue(operation.execute());
     }
 
@@ -38,7 +43,7 @@ public class CloseAccountTest extends TestCase {
     }
 
     public void testBalanceLessThanZero() throws Exception {
-        account.setBalance(-100);
+        accountDecorator.substract(1100);
         assertFalse(operation.execute());
-    } */
+    }
 }
