@@ -13,12 +13,39 @@ import java.util.List;
 //TODO: Wzorzecz State do naliczania odsetek
 //TODO: Wzorzec Decorator (do konta debetowego)
 //TODO: Wzorzec mediator do rozliczeń międzybankowych (ELIXIR)
-//TODO: Nadawanie numeru konta
-//TODO: Identyfikator banku
 public class Bank {
     private List<User> users = new ArrayList<>();
     private List<AccountInterface> accounts = new ArrayList<>();
+    private Mediator mediator;
+    private String bankId;
+    private String maxAccountId = "0";
+    
+    public Bank(Mediator mediator, String bankId){
+    	this.mediator = mediator;
+    	this.bankId = bankId;
+    }
+    
+    
 
+	public String getNextAccountId()	{
+		Long max = Long.parseLong(maxAccountId);
+		max++;
+		maxAccountId =  String.format("%016d", max);
+		return maxAccountId;
+	}
+
+	public void setMaxAccountId(String maxAccountId)	{
+		this.maxAccountId = maxAccountId;
+	}
+
+	public String getBankId()	{
+		return bankId;
+	}
+	
+	public void setBankId(String bankId)	{
+		this.bankId = bankId;
+	}
+	
     public List<User> getUsers() {
         return users;
     }
@@ -68,5 +95,11 @@ public class Bank {
             sum += value;
         }
         return sum;
+    }
+    
+    public User createUser(String name, String surname){
+    	User user = new User(name, surname);
+    	addUserToList(user);
+    	return user;
     }
 }

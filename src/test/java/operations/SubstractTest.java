@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import util.Bank;
+import util.Mediator;
 import util.User;
 
 import static org.junit.Assert.*;
@@ -18,7 +19,7 @@ public class SubstractTest extends TestCase {
 
     @Before
     public void setUp() throws Exception {
-        bank = new Bank();
+        bank = new Bank(new Mediator(),"00000001");
         User user = new User("Zbigniew", "Testowy");
         account = new Account(user, 1000, bank);
     }

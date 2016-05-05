@@ -8,18 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+	private static int maxId;
 	private int id; 
 	private String name; 
 	private String surname; 
 	private List<Account> accounts = new ArrayList<>();
-	private Bank bank = new Bank();
 	private List<Deposit> deposits = new ArrayList<>();
 
 	public User(String name, String surname) {
 		this.name = name;
 		this.surname = surname;
-		bank.addUserToList(this);
-		this.id = bank.getUsers().lastIndexOf(this);
+		this.id = ++maxId;
 	}
 
 	public int getId() {
@@ -49,7 +48,6 @@ public class User {
 		}
 	}
 	
-
 	public void addDeposit(Deposit deposit){
 		this.deposits.add(deposit);
 	}

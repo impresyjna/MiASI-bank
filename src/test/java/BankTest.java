@@ -15,7 +15,15 @@ public class BankTest extends TestCase {
 
     @Before
     protected void setUp() throws Exception {
-        bank = new Bank();
+        bank = new Bank(new Mediator(),"00000001");
+    }
+    
+    public void testCreateAccount() throws Exception{
+    	User user = bank.createUser("test", "test");
+    	Account a = new Account(user, 1000, bank);
+    	Account aa = new Account(user, 1000, bank);
+    	assertTrue(a.getId().equals("99000000010000000000000001"));
+    	assertTrue(aa.getId().equals("99000000010000000000000002"));
     }
 
     public void testPassAllReportDoReport() throws Exception {

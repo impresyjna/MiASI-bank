@@ -11,5 +11,5 @@ public interface AccountInterface {
     boolean transfer(Account to, double amount);
     Object accept(VisitorInterface visitor);
     //TODO: Lepsze zwracanie obiektu z interfejsu
-    long getId();
+    String getId();
 }

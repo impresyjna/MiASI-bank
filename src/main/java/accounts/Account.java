@@ -16,7 +16,7 @@ import java.util.List;
 //TODO: Numer konta
 public class Account implements AccountInterface {
     private User owner;
-    private long id;
+    private String id;
     private Date startDate;
     private double balance;
     private boolean open;
@@ -31,6 +31,8 @@ public class Account implements AccountInterface {
         this.balance = balance;
         this.open = true;
         bank.addAccountToList(this);
+        String str = "99" + bank.getBankId() + bank.getNextAccountId();
+        this.id = str;
     }
 
     public User getOwner() {
@@ -42,11 +44,11 @@ public class Account implements AccountInterface {
     }
 
     @Override
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

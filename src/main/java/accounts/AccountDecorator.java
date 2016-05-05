@@ -11,7 +11,7 @@ public class AccountDecorator implements AccountInterface{
     private double limit;
     private double debit; //To jest dodatnia reprezentacja ujemnej wartości :D
     private Account account;
-    private long id;
+    private String id;
 
     public AccountDecorator(Account account, double limit, Bank bank) {
         this.account = account;
@@ -81,7 +81,7 @@ public class AccountDecorator implements AccountInterface{
     }
 
     @Override
-    public long getId() {
+    public String getId() {
         return id;
     }
 
