@@ -84,4 +84,12 @@ public class AccountDecorator implements AccountInterface{
     public long getId() {
         return id;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public double getDebit() {
+        return debit;
+    }
 }

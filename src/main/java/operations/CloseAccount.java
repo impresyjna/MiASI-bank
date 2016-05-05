@@ -5,7 +5,6 @@ import accounts.Account;
 /**
  * Created by impresyjna on 15.04.2016.
  */
-//TODO: Naprawić to dla AccountDecorator
 public class CloseAccount extends Operation {
     private Account account;
 
